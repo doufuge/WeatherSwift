@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DCA597F12D69E36D00B59D14 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = DCA597F02D69E36D00B59D14 /* CombineMoya */; };
+		DCA597F32D69E36D00B59D14 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = DCA597F22D69E36D00B59D14 /* Moya */; };
+		DCA597F52D69E36D00B59D14 /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = DCA597F42D69E36D00B59D14 /* ReactiveMoya */; };
+		DCA597F72D69E36D00B59D14 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = DCA597F62D69E36D00B59D14 /* RxMoya */; };
+		DCA598422D6A149A00B59D14 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DCA598412D6A149A00B59D14 /* Lottie */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		DCA597D72D69E19E00B59D14 /* WeatherSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,6 +44,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCA598422D6A149A00B59D14 /* Lottie in Frameworks */,
+				DCA597F32D69E36D00B59D14 /* Moya in Frameworks */,
+				DCA597F12D69E36D00B59D14 /* CombineMoya in Frameworks */,
+				DCA597F72D69E36D00B59D14 /* RxMoya in Frameworks */,
+				DCA597F52D69E36D00B59D14 /* ReactiveMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +91,11 @@
 			);
 			name = WeatherSwift;
 			packageProductDependencies = (
+				DCA597F02D69E36D00B59D14 /* CombineMoya */,
+				DCA597F22D69E36D00B59D14 /* Moya */,
+				DCA597F42D69E36D00B59D14 /* ReactiveMoya */,
+				DCA597F62D69E36D00B59D14 /* RxMoya */,
+				DCA598412D6A149A00B59D14 /* Lottie */,
 			);
 			productName = WeatherSwift;
 			productReference = DCA597D72D69E19E00B59D14 /* WeatherSwift.app */;
@@ -107,6 +125,10 @@
 			);
 			mainGroup = DCA597CE2D69E19E00B59D14;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */,
+				DCA598402D6A149A00B59D14 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DCA597D82D69E19E00B59D14 /* Products */;
 			projectDirPath = "";
@@ -148,11 +170,13 @@
 				DEVELOPMENT_TEAM = 842E69JGKR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherSwift/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location for fetch weather info.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location for fetch weather info.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -160,9 +184,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.johny.WeatherSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -176,11 +204,13 @@
 				DEVELOPMENT_TEAM = 842E69JGKR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherSwift/Info.plist;
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location for fetch weather info.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location for fetch weather info.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -188,9 +218,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.johny.WeatherSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -335,6 +369,53 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		DCA598402D6A149A00B59D14 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DCA597F02D69E36D00B59D14 /* CombineMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = CombineMoya;
+		};
+		DCA597F22D69E36D00B59D14 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		DCA597F42D69E36D00B59D14 /* ReactiveMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = ReactiveMoya;
+		};
+		DCA597F62D69E36D00B59D14 /* RxMoya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = RxMoya;
+		};
+		DCA598412D6A149A00B59D14 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DCA598402D6A149A00B59D14 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DCA597CF2D69E19E00B59D14 /* Project object */;
 }
