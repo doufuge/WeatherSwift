@@ -7,23 +7,23 @@
 
 import Foundation
 import Moya
+import CombineMoya
+import Combine
 
 class WeatherAction {
     
-    func fetchWeather(latitude: Double, longitude: Double, hourly: String = "temperature_2m", completion: @escaping (Result<WeatherResponse, Error>) -> Void) {
-        weatherProvider.request(.fetchWeather(latitude: latitude, longitude: longitude, hourly: hourly)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let weatherResponse = try JSONDecoder().decode(WeatherResponse.self, from: response.data)
-                    completion(.success(weatherResponse))
-                } catch {
-                    completion(.failure(error))
-                }
-            case .failure(let error):
-                completion(.failure(error))
+    func fetchWeather(latitude: Double, longitude: Double, hourly: String = "temperature_2m") -> AnyPublisher<[WeatherItem], Error> {
+        return weatherProvider
+            .requestPublisher(.fetchWeather(latitude: latitude, longitude: longitude, hourly: hourly))
+            .filter { $0.statusCode == 200 }
+            .map { $0.data }
+            .decode(type: WeatherResponse.self, decoder: JSONDecoder())
+            .map { data in
+                data.hourly.time.enumerated().map({ (index, item) in
+                    return WeatherItem(hour: item, temp: data.hourly.temperature_2m[index])
+                })
             }
-        }
+            .eraseToAnyPublisher()
     }
     
 }

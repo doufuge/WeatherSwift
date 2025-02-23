@@ -5,24 +5,24 @@
 //  Created by Johny Fu on 2025/2/23.
 //
 
-import RxSwift
+import Combine
 
 class HUDManager {
     
     static let shared = HUDManager()
     
-    private let _isLoading = BehaviorSubject<Bool>(value: false)
+    private let _isLoading = CurrentValueSubject<Bool, Never>(false)
     
-    var isLoading: Observable<Bool> {
-        return _isLoading.asObservable()
+    var isLoading: AnyPublisher<Bool, Never> {
+        return _isLoading.eraseToAnyPublisher()
     }
     
     func show() {
-        _isLoading.onNext(true)
+        _isLoading.send(true)
     }
     
     func hide() {
-        _isLoading.onNext(false)
+        _isLoading.send(false)
     }
     
 }

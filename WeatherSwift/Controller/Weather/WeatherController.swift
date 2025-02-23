@@ -6,12 +6,12 @@
 //
 
 import UIKit
-import RxSwift
+import Combine
 
 class WeatherController: UIViewController {
     
     var viewModel = WeatherViewModel()
-    private let disposeBag = DisposeBag()
+    private var cancellables = Set<AnyCancellable>()
     
     @IBOutlet weak var hud: Hud!
     @IBOutlet weak var lineChart: LineChart!
@@ -22,27 +22,34 @@ class WeatherController: UIViewController {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         viewModel.startUpdatingLocation()
-        viewModel.onWeatherDataLoaded = { [weak self] in
-            self?.lineChart.data = (self?.viewModel.data)!
-            self?.tableChart.data = (self?.viewModel.data)!
-        }
+    
         HUDManager.shared.isLoading
-            .observe(on: MainScheduler.instance)
-            .subscribe(onNext: { [weak self] isLoading in
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] isLoading in
                 self?.hud.isHidden = !isLoading
             })
-            .disposed(by: disposeBag)
-        viewModel.onViewModeChanged = { [weak self] in
-            if self?.viewModel.showTable == true {
-                self?.tableChart.isHidden = false
-                self?.lineChart.isHidden = true
-                self?.viewModeBtn.image = UIImage(systemName: "chart.xyaxis.line")
-            } else {
-                self?.tableChart.isHidden = true
-                self?.lineChart.isHidden = false
-                self?.viewModeBtn.image = UIImage(systemName: "list.bullet")
+            .store(in: &cancellables)
+        viewModel.$data
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] weatherItems in
+                self?.lineChart.data = (self?.viewModel.data)!
+                self?.tableChart.data = (self?.viewModel.data)!
             }
-        }
+            .store(in: &cancellables)
+        viewModel.$showTable
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] showTable in
+                if showTable == true {
+                    self?.tableChart.isHidden = false
+                    self?.lineChart.isHidden = true
+                    self?.viewModeBtn.image = UIImage(systemName: "chart.xyaxis.line")
+                } else {
+                    self?.tableChart.isHidden = true
+                    self?.lineChart.isHidden = false
+                    self?.viewModeBtn.image = UIImage(systemName: "list.bullet")
+                }
+            }
+            .store(in: &cancellables)
     }
     
     @IBAction func reload(_ sender: Any) {

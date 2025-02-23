@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		DCA597F12D69E36D00B59D14 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = DCA597F02D69E36D00B59D14 /* CombineMoya */; };
 		DCA597F32D69E36D00B59D14 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = DCA597F22D69E36D00B59D14 /* Moya */; };
-		DCA597F52D69E36D00B59D14 /* ReactiveMoya in Frameworks */ = {isa = PBXBuildFile; productRef = DCA597F42D69E36D00B59D14 /* ReactiveMoya */; };
-		DCA597F72D69E36D00B59D14 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = DCA597F62D69E36D00B59D14 /* RxMoya */; };
 		DCA598422D6A149A00B59D14 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DCA598412D6A149A00B59D14 /* Lottie */; };
 /* End PBXBuildFile section */
 
@@ -47,8 +45,6 @@
 				DCA598422D6A149A00B59D14 /* Lottie in Frameworks */,
 				DCA597F32D69E36D00B59D14 /* Moya in Frameworks */,
 				DCA597F12D69E36D00B59D14 /* CombineMoya in Frameworks */,
-				DCA597F72D69E36D00B59D14 /* RxMoya in Frameworks */,
-				DCA597F52D69E36D00B59D14 /* ReactiveMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,8 +89,6 @@
 			packageProductDependencies = (
 				DCA597F02D69E36D00B59D14 /* CombineMoya */,
 				DCA597F22D69E36D00B59D14 /* Moya */,
-				DCA597F42D69E36D00B59D14 /* ReactiveMoya */,
-				DCA597F62D69E36D00B59D14 /* RxMoya */,
 				DCA598412D6A149A00B59D14 /* Lottie */,
 			);
 			productName = WeatherSwift;
@@ -399,16 +393,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
-		};
-		DCA597F42D69E36D00B59D14 /* ReactiveMoya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = ReactiveMoya;
-		};
-		DCA597F62D69E36D00B59D14 /* RxMoya */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */;
-			productName = RxMoya;
 		};
 		DCA598412D6A149A00B59D14 /* Lottie */ = {
 			isa = XCSwiftPackageProductDependency;

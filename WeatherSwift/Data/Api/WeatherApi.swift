@@ -11,8 +11,8 @@ import Moya
 let weatherProvider = MoyaProvider<WeatherApi>(
     endpointClosure: customEndpointClosure,
     stubClosure: customStubClosure,
-    session: AppModule.sharedInstance.session(),
-    plugins: [NetworkLoggerPlugin(), AppModule.sharedInstance.hudPlugin]
+    session: AppModule.shared.session(),
+    plugins: [NetworkLoggerPlugin(), AppModule.shared.hudPlugin]
 )
 
 let customEndpointClosure = { (target: WeatherApi) -> Endpoint in
@@ -29,7 +29,7 @@ let customEndpointClosure = { (target: WeatherApi) -> Endpoint in
         )
     default:
         var endpoint = MoyaProvider.defaultEndpointMapping(for: target)
-        let headers = AppModule.sharedInstance.sessionHeader(target.path)
+        let headers = AppModule.shared.sessionHeader(target.path)
         print(headers)
         return endpoint.adding(newHTTPHeaderFields: headers)
     }
@@ -89,4 +89,16 @@ extension WeatherApi: TargetType {
     var headers: [String: String]? {
         return ["Content-Type": "application/json"]
     }
+    var hudShow: Bool {
+        switch self {
+        case .fetchWeather:
+            return true
+        default:
+            return false
+        }
+    }
+}
+
+public extension TargetType {
+    var hudShow: Bool { true }
 }

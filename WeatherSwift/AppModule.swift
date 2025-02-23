@@ -9,9 +9,9 @@ import Foundation
 import Alamofire
 import Moya
 
-private let appModule = AppModule()
-
-class AppModule: NSObject {
+class AppModule {
+    
+    static let shared = AppModule()
     
     var token = ""
     
@@ -19,16 +19,16 @@ class AppModule: NSObject {
     
     let hudPlugin = NetworkActivityPlugin { state, target in
         if state == .began {
-            HUDManager.shared.show()
+            if target.hudShow {
+                HUDManager.shared.show()
+            }
             print("开始请求网络数据...")
         } else {
-            HUDManager.shared.hide()
+            if target.hudShow {
+                HUDManager.shared.hide()
+            }
             print("请求网络数据结束...")
         }
-    }
-    
-    class var sharedInstance: AppModule {
-        return appModule
     }
     
 }

@@ -7,23 +7,19 @@
 
 import Foundation
 import CoreLocation
+import Combine
 
-class WeatherViewModel: NSObject, CLLocationManagerDelegate {
+class WeatherViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
+    
+    private var cancellables = Set<AnyCancellable>()
     
     private let weatherAction = WeatherAction()
     private var locationManager: CLLocationManager
     private var currentLocation: CLLocation?
     
-    var showTable: Bool = false {
-        didSet {
-            onViewModeChanged?()
-        }
-    }
-    var data: [WeatherItem] = [] {
-        didSet {
-            onWeatherDataLoaded?()
-        }
-    }
+    @Published var data: [WeatherItem] = []
+    @Published var showTable: Bool = false
+    
     var tipOptions: TipOptions = TipOptions(show: false, tip: "")
     
     override init() {
@@ -39,26 +35,26 @@ class WeatherViewModel: NSObject, CLLocationManagerDelegate {
     
     func fetchWeather() {
         if (currentLocation != nil && currentLocation?.coordinate != nil) {
-            weatherAction.fetchWeather(latitude: (currentLocation?.coordinate.latitude)!, longitude: (currentLocation?.coordinate.longitude)!) { result in
-                switch result {
-                case .success(let json):
-                    if json.hourly.time.count == json.hourly.temperature_2m.count {
-                        self.data = json.hourly.time.enumerated().map({ (index, item) in
-                            return WeatherItem(hour: item, temp: json.hourly.temperature_2m[index])
-                        })
-                    }
-                    self.showTip(show: true, tip: "Fetch Success", autoHide: true)
-                case .failure(let error):
-                    self.showTip(show: true, tip: "Fetch error: \(error.localizedDescription)", autoHide: true)
-                }
+            cancellables.forEach {
+                $0.cancel()
             }
+            weatherAction.fetchWeather(latitude: (currentLocation?.coordinate.latitude)!, longitude: (currentLocation?.coordinate.longitude)!)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        print("======= finish")
+                    case .failure(let error):
+                        print("======= failure: \(error.localizedDescription)")
+                    }
+                }, receiveValue: { [weak self] WeatherItems in
+                    self?.data = WeatherItems
+                })
+                .store(in: &cancellables)
+            
         } else {
             self.showTip(show: true, tip: "Has no available location", autoHide: true)
         }
     }
-    
-    var onWeatherDataLoaded: (() -> Void)?
-    var onViewModeChanged: (() -> Void)?
     
     func toggleViewMode() {
         showTable.toggle()
