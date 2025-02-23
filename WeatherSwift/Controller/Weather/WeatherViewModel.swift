@@ -24,11 +24,6 @@ class WeatherViewModel: NSObject, CLLocationManagerDelegate {
             onWeatherDataLoaded?()
         }
     }
-    var loading: Bool = true {
-        didSet {
-            onLoadStatusChanged?()
-        }
-    }
     var tipOptions: TipOptions = TipOptions(show: false, tip: "")
     
     override init() {
@@ -44,7 +39,6 @@ class WeatherViewModel: NSObject, CLLocationManagerDelegate {
     
     func fetchWeather() {
         if (currentLocation != nil && currentLocation?.coordinate != nil) {
-            loading = true
             weatherAction.fetchWeather(latitude: (currentLocation?.coordinate.latitude)!, longitude: (currentLocation?.coordinate.longitude)!) { result in
                 switch result {
                 case .success(let json):
@@ -54,10 +48,8 @@ class WeatherViewModel: NSObject, CLLocationManagerDelegate {
                         })
                     }
                     self.showTip(show: true, tip: "Fetch Success", autoHide: true)
-                    self.loading = false
                 case .failure(let error):
                     self.showTip(show: true, tip: "Fetch error: \(error.localizedDescription)", autoHide: true)
-                    self.loading = false
                 }
             }
         } else {
@@ -66,7 +58,6 @@ class WeatherViewModel: NSObject, CLLocationManagerDelegate {
     }
     
     var onWeatherDataLoaded: (() -> Void)?
-    var onLoadStatusChanged: (() -> Void)?
     var onViewModeChanged: (() -> Void)?
     
     func toggleViewMode() {
@@ -74,17 +65,13 @@ class WeatherViewModel: NSObject, CLLocationManagerDelegate {
     }
     
     func showTip(show: Bool, tip: String, autoHide: Bool) {
-//        withAnimation(.easeInOut(duration: 0.5)) {
-            self.tipOptions = TipOptions(show: show, tip: tip, autoHide: autoHide)
-//        }
+        self.tipOptions = TipOptions(show: show, tip: tip, autoHide: autoHide)
     }
     
     func onTipShow() {
         if tipOptions.show && tipOptions.autoHide {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                withAnimation(.easeInOut(duration: 0.5)) {
-                    self.tipOptions = TipOptions(show: false, tip: "")
-//                }
+                self.tipOptions = TipOptions(show: false, tip: "")
             }
         }
     }

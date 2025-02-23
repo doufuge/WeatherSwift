@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RxSwift
 
 class WeatherController: UIViewController {
     
     var viewModel = WeatherViewModel()
+    private let disposeBag = DisposeBag()
     
     @IBOutlet weak var hud: Hud!
     @IBOutlet weak var lineChart: LineChart!
@@ -24,9 +26,12 @@ class WeatherController: UIViewController {
             self?.lineChart.data = (self?.viewModel.data)!
             self?.tableChart.data = (self?.viewModel.data)!
         }
-        viewModel.onLoadStatusChanged = { [weak self] in
-            self?.hud.isHidden = self?.viewModel.loading == false
-        }
+        HUDManager.shared.isLoading
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] isLoading in
+                self?.hud.isHidden = !isLoading
+            })
+            .disposed(by: disposeBag)
         viewModel.onViewModeChanged = { [weak self] in
             if self?.viewModel.showTable == true {
                 self?.tableChart.isHidden = false
