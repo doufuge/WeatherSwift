@@ -14,7 +14,7 @@ class WeatherViewModel: NSObject, CLLocationManagerDelegate {
     private var locationManager: CLLocationManager
     private var currentLocation: CLLocation?
     
-    var showTable: Bool = true {
+    var showTable: Bool = false {
         didSet {
             onViewModeChanged?()
         }

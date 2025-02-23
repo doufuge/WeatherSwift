@@ -17,8 +17,8 @@ class SplashController: UIViewController {
         NSLayoutConstraint.activate([
             animationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             animationView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            animationView.widthAnchor.constraint(equalToConstant: 280),
-            animationView.heightAnchor.constraint(equalToConstant: 280)
+            animationView.widthAnchor.constraint(equalToConstant: 300),
+            animationView.heightAnchor.constraint(equalToConstant: 300)
         ])
         
         animationView.play()

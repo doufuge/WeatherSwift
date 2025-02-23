@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ecq-9q-Xzj">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_3" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Image references" minToolsVersion="12.0"/>
@@ -14,71 +14,19 @@
             <objects>
                 <viewController storyboardIdentifier="Weather" id="Yrx-k0-oVL" customClass="WeatherController" customModule="WeatherSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H1z-Up-93x">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NgJ-Y9-C3s">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <color key="sectionIndexBackgroundColor" systemColor="systemYellowColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="WeatherCell" rowHeight="44" id="fN8-cV-fJJ" customClass="WeatherCell" customModule="WeatherSwift" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fN8-cV-fJJ" id="Mzs-4P-LON">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="hourLabel" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bow-6H-81d">
-                                                    <rect key="frame" x="20" y="12" width="150" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="150" id="MFD-AM-3Of"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8zt-N7-Wln">
-                                                    <rect key="frame" x="178" y="0.0" width="1" height="44"/>
-                                                    <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="1" id="xNO-7N-uKN"/>
-                                                    </constraints>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="tempLabel" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ynj-iV-11A">
-                                                    <rect key="frame" x="187" y="11.666666666666664" width="178" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <color key="backgroundColor" systemColor="systemYellowColor"/>
-                                            <constraints>
-                                                <constraint firstItem="Ynj-iV-11A" firstAttribute="leading" secondItem="8zt-N7-Wln" secondAttribute="trailing" constant="8" id="0w7-7T-ta2"/>
-                                                <constraint firstItem="8zt-N7-Wln" firstAttribute="top" secondItem="Mzs-4P-LON" secondAttribute="top" id="KKP-vD-Got"/>
-                                                <constraint firstAttribute="bottom" secondItem="8zt-N7-Wln" secondAttribute="bottom" id="QzE-GU-9Jr"/>
-                                                <constraint firstItem="bow-6H-81d" firstAttribute="leading" secondItem="Mzs-4P-LON" secondAttribute="leadingMargin" id="e1a-n8-vtK"/>
-                                                <constraint firstItem="bow-6H-81d" firstAttribute="centerY" secondItem="Mzs-4P-LON" secondAttribute="centerY" id="pnE-ys-hXF"/>
-                                                <constraint firstItem="bow-6H-81d" firstAttribute="top" secondItem="Mzs-4P-LON" secondAttribute="topMargin" constant="1" id="qf8-dV-WDr"/>
-                                                <constraint firstItem="Ynj-iV-11A" firstAttribute="centerY" secondItem="Mzs-4P-LON" secondAttribute="centerY" id="sQU-tt-j2H"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Ynj-iV-11A" secondAttribute="trailing" constant="8" id="w7a-Vl-Gyg"/>
-                                                <constraint firstItem="8zt-N7-Wln" firstAttribute="leading" secondItem="bow-6H-81d" secondAttribute="trailing" constant="8" id="yem-hN-Uqg"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="container" destination="Mzs-4P-LON" id="cNh-Ax-CNG"/>
-                                            <outlet property="hourLabel" destination="bow-6H-81d" id="x1y-EB-8SM"/>
-                                            <outlet property="tempLabel" destination="Ynj-iV-11A" id="a2g-ZO-VM7"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ejo-CN-kaB" customClass="LineChart" customModule="WeatherSwift" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <rect key="frame" x="0.0" y="106" width="402" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8k3-A0-Qft" customClass="TableChart" customModule="WeatherSwift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="106" width="402" height="734"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ETo-ef-1nV" customClass="Hud" customModule="WeatherSwift" customModuleProvider="target">
-                                <rect key="frame" x="132.66666666666666" y="362" width="127.99999999999997" height="128"/>
+                                <rect key="frame" x="137" y="373" width="128" height="128"/>
                                 <color key="backgroundColor" white="0.25" alpha="0.92479822019867552" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="M3h-re-zX4"/>
@@ -89,13 +37,9 @@
                         <viewLayoutGuide key="safeArea" id="J2H-QW-bSH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="NgJ-Y9-C3s" firstAttribute="top" secondItem="J2H-QW-bSH" secondAttribute="top" id="26g-N7-ebZ"/>
                             <constraint firstItem="ejo-CN-kaB" firstAttribute="trailing" secondItem="J2H-QW-bSH" secondAttribute="trailing" id="8tS-9G-cPC"/>
-                            <constraint firstItem="NgJ-Y9-C3s" firstAttribute="leading" secondItem="J2H-QW-bSH" secondAttribute="leading" id="ByE-y6-phF"/>
                             <constraint firstItem="ETo-ef-1nV" firstAttribute="centerY" secondItem="H1z-Up-93x" secondAttribute="centerY" id="CVj-lo-ERZ"/>
                             <constraint firstItem="ejo-CN-kaB" firstAttribute="top" secondItem="J2H-QW-bSH" secondAttribute="top" id="JAV-b1-deu"/>
-                            <constraint firstItem="NgJ-Y9-C3s" firstAttribute="centerX" secondItem="H1z-Up-93x" secondAttribute="centerX" id="VVL-lL-QOc"/>
-                            <constraint firstItem="NgJ-Y9-C3s" firstAttribute="bottom" secondItem="J2H-QW-bSH" secondAttribute="bottom" id="WvO-fL-V5Z"/>
                             <constraint firstAttribute="bottom" secondItem="ejo-CN-kaB" secondAttribute="bottom" id="oyJ-cx-XYk"/>
                             <constraint firstItem="ejo-CN-kaB" firstAttribute="leading" secondItem="J2H-QW-bSH" secondAttribute="leading" id="v3g-Q6-4ni"/>
                             <constraint firstItem="ETo-ef-1nV" firstAttribute="centerX" secondItem="H1z-Up-93x" secondAttribute="centerX" id="zod-cd-sQf"/>
@@ -104,7 +48,7 @@
                     <navigationItem key="navigationItem" title="Weather" id="srU-Rs-pkU">
                         <rightBarButtonItems>
                             <barButtonItem title="Item" id="Wdh-KZ-16G">
-                                <imageReference key="image" image="chart.xyaxis.line" catalog="system" symbolScale="default"/>
+                                <imageReference key="image" image="list.bullet" catalog="system" symbolScale="default"/>
                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                 <connections>
                                     <action selector="toggleViewMode:" destination="Yrx-k0-oVL" id="NEs-hK-ih1"/>
@@ -122,23 +66,24 @@
                     <connections>
                         <outlet property="hud" destination="ETo-ef-1nV" id="laU-UP-WTM"/>
                         <outlet property="lineChart" destination="ejo-CN-kaB" id="8ko-uW-1bA"/>
-                        <outlet property="tableView" destination="NgJ-Y9-C3s" id="dwK-R0-6xg"/>
+                        <outlet property="tableChart" destination="8k3-A0-Qft" id="MHL-Gh-5hc"/>
+                        <outlet property="viewModeBtn" destination="Wdh-KZ-16G" id="gM8-WV-tVQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qsa-1H-zHe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="267.93893129770993" y="-215.49295774647888"/>
+            <point key="canvasLocation" x="265.67164179104475" y="-215.56064073226543"/>
         </scene>
         <!--Splash Controller-->
         <scene sceneID="P6N-E9-MRb">
             <objects>
                 <viewController storyboardIdentifier="Splash" id="mJm-br-RFy" customClass="SplashController" customModule="WeatherSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FtE-hB-U5o">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="cloud.snow.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Uib-gb-q1H">
-                                <rect key="frame" x="132.66666666666666" y="210.66666666666669" width="127.99999999999997" height="129.66666666666663"/>
+                                <rect key="frame" x="137" y="213.66666666666669" width="128" height="129.66666666666669"/>
                                 <color key="tintColor" systemColor="systemGreenColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="4sL-fU-NXS"/>
@@ -167,7 +112,7 @@
             <objects>
                 <navigationController id="ecq-9q-Xzj" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gIk-Mq-Tir">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <rect key="frame" x="0.0" y="62" width="402" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -181,16 +126,13 @@
     </scenes>
     <resources>
         <image name="arrow.clockwise" catalog="system" width="110" height="128"/>
-        <image name="chart.xyaxis.line" catalog="system" width="128" height="102"/>
         <image name="cloud.snow.fill" catalog="system" width="122" height="128"/>
+        <image name="list.bullet" catalog="system" width="128" height="87"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
