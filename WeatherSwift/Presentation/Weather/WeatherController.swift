@@ -7,10 +7,11 @@
 
 import UIKit
 import Combine
+import SwinjectStoryboard
 
 class WeatherController: UIViewController {
     
-    var viewModel = WeatherViewModel()
+    var viewModel: WeatherViewModel!
     private var cancellables = Set<AnyCancellable>()
     
     @IBOutlet weak var hud: Hud!
@@ -53,7 +54,7 @@ class WeatherController: UIViewController {
     }
     
     @IBAction func reload(_ sender: Any) {
-        viewModel.fetchWeather()
+        viewModel.loadWeather()
     }
     
     @IBAction func toggleViewMode(_ sender: Any) {

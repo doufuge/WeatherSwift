@@ -8,6 +8,8 @@
 import Foundation
 import Alamofire
 import Moya
+import Swinject
+import SwinjectStoryboard
 
 class AppModule {
     
@@ -54,4 +56,22 @@ extension AppModule {
         }
     }
     
+}
+
+extension SwinjectStoryboard {
+    @objc class func setup() {
+        let container = Container()
+        container.register(WeatherRepository.self) { _ in WeatherRepositoryImpl() }
+        container.register(FetchWeatherUseCase.self) { resolver in
+            FetchWeatherUseCase(repository: resolver.resolve(WeatherRepository.self)!)
+        }
+        container.register(WeatherViewModel.self) { resolver in
+            WeatherViewModel(fetchWeather: resolver.resolve(FetchWeatherUseCase.self)!)
+        }
+        
+        container.storyboardInitCompleted(WeatherController.self) { resolver, vc in
+            vc.viewModel = resolver.resolve(WeatherViewModel.self)
+        }
+        defaultContainer = container
+    }
 }

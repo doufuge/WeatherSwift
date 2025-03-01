@@ -1,18 +1,17 @@
 //
-//  NetworkService.swift
-//  WeatherSwiftUI
+//  WeatherRepositoryImpl.swift
+//  WeatherSwift
 //
-//  Created by Johny Fu on 2025/2/21.
+//  Created by Johny Fu on 2025/3/1.
 //
 
 import Foundation
-import Moya
-import CombineMoya
 import Combine
+import CombineMoya
 
-class WeatherAction {
+class WeatherRepositoryImpl: WeatherRepository {
     
-    func fetchWeather(latitude: Double, longitude: Double, hourly: String = "temperature_2m") -> AnyPublisher<[WeatherItem], Error> {
+    func fetchWeather(latitude: Double, longitude: Double, hourly: String = "temperature_2m") -> AnyPublisher<[WeatherItem], any Error> {
         return weatherProvider
             .requestPublisher(.fetchWeather(latitude: latitude, longitude: longitude, hourly: hourly))
             .filter { $0.statusCode == 200 }

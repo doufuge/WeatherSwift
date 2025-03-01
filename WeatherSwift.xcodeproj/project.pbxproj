@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC9661092D6C1B3F00F961EF /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = DC9661082D6C1B3F00F961EF /* Swinject */; };
+		DC9661112D6C211A00F961EF /* SwinjectStoryboard in Frameworks */ = {isa = PBXBuildFile; productRef = DC9661102D6C211A00F961EF /* SwinjectStoryboard */; };
 		DCA597F12D69E36D00B59D14 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = DCA597F02D69E36D00B59D14 /* CombineMoya */; };
 		DCA597F32D69E36D00B59D14 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = DCA597F22D69E36D00B59D14 /* Moya */; };
 		DCA598422D6A149A00B59D14 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DCA598412D6A149A00B59D14 /* Lottie */; };
@@ -45,6 +47,8 @@
 				DCA598422D6A149A00B59D14 /* Lottie in Frameworks */,
 				DCA597F32D69E36D00B59D14 /* Moya in Frameworks */,
 				DCA597F12D69E36D00B59D14 /* CombineMoya in Frameworks */,
+				DC9661112D6C211A00F961EF /* SwinjectStoryboard in Frameworks */,
+				DC9661092D6C1B3F00F961EF /* Swinject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +94,8 @@
 				DCA597F02D69E36D00B59D14 /* CombineMoya */,
 				DCA597F22D69E36D00B59D14 /* Moya */,
 				DCA598412D6A149A00B59D14 /* Lottie */,
+				DC9661082D6C1B3F00F961EF /* Swinject */,
+				DC9661102D6C211A00F961EF /* SwinjectStoryboard */,
 			);
 			productName = WeatherSwift;
 			productReference = DCA597D72D69E19E00B59D14 /* WeatherSwift.app */;
@@ -122,6 +128,8 @@
 			packageReferences = (
 				DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */,
 				DCA598402D6A149A00B59D14 /* XCRemoteSwiftPackageReference "lottie-spm" */,
+				DC9661072D6C1B3F00F961EF /* XCRemoteSwiftPackageReference "Swinject" */,
+				DC96610F2D6C211A00F961EF /* XCRemoteSwiftPackageReference "SwinjectStoryboard" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DCA597D82D69E19E00B59D14 /* Products */;
@@ -365,6 +373,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DC9661072D6C1B3F00F961EF /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
+		DC96610F2D6C211A00F961EF /* XCRemoteSwiftPackageReference "SwinjectStoryboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/SwinjectStoryboard";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.3;
+			};
+		};
 		DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya";
@@ -384,6 +408,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DC9661082D6C1B3F00F961EF /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC9661072D6C1B3F00F961EF /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		DC9661102D6C211A00F961EF /* SwinjectStoryboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DC96610F2D6C211A00F961EF /* XCRemoteSwiftPackageReference "SwinjectStoryboard" */;
+			productName = SwinjectStoryboard;
+		};
 		DCA597F02D69E36D00B59D14 /* CombineMoya */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DCA597EF2D69E36D00B59D14 /* XCRemoteSwiftPackageReference "Moya" */;

@@ -11,9 +11,10 @@ import Combine
 
 class WeatherViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
-    private var cancellables = Set<AnyCancellable>()
+    private let fetchWeather: FetchWeatherUseCase
     
-    private let weatherAction = WeatherAction()
+    private var cancellables = Set<AnyCancellable>()
+
     private var locationManager: CLLocationManager
     private var currentLocation: CLLocation?
     
@@ -22,23 +23,24 @@ class WeatherViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     var tipOptions: TipOptions = TipOptions(show: false, tip: "")
     
-    override init() {
+    init(fetchWeather: FetchWeatherUseCase) {
+        self.fetchWeather = fetchWeather
         locationManager = CLLocationManager()
         super.init()
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
     }
     
     func startUpdatingLocation() {
         locationManager.startUpdatingLocation()
     }
     
-    func fetchWeather() {
+    func loadWeather() {
         if (currentLocation != nil && currentLocation?.coordinate != nil) {
             cancellables.forEach {
                 $0.cancel()
             }
-            weatherAction.fetchWeather(latitude: (currentLocation?.coordinate.latitude)!, longitude: (currentLocation?.coordinate.longitude)!)
+            fetchWeather.execute(latitude: (currentLocation?.coordinate.latitude)!, longitude: (currentLocation?.coordinate.longitude)!)
                 .sink(receiveCompletion: { completion in
                     switch completion {
                     case .finished:
@@ -75,7 +77,7 @@ class WeatherViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let newLocation = locations.last {
             self.currentLocation = newLocation
-            self.fetchWeather()
+            self.loadWeather()
         }
     }
     
