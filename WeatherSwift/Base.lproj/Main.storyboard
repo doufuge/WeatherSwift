@@ -25,6 +25,23 @@
                                 <rect key="frame" x="0.0" y="106" width="402" height="734"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WW7-rU-DdN">
+                                <rect key="frame" x="0.0" y="106" width="402" height="44"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSa-tI-tww">
+                                        <rect key="frame" x="180" y="11.666666666666671" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <constraints>
+                                    <constraint firstItem="zSa-tI-tww" firstAttribute="centerY" secondItem="WW7-rU-DdN" secondAttribute="centerY" id="D1C-Ht-OgW"/>
+                                    <constraint firstAttribute="height" constant="44" id="hdI-tW-tDN"/>
+                                    <constraint firstItem="zSa-tI-tww" firstAttribute="centerX" secondItem="WW7-rU-DdN" secondAttribute="centerX" id="xA9-co-AP9"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ETo-ef-1nV" customClass="Hud" customModule="WeatherSwift" customModuleProvider="target">
                                 <rect key="frame" x="137" y="373" width="128" height="128"/>
                                 <color key="backgroundColor" white="0.25" alpha="0.92479822019867552" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -37,10 +54,13 @@
                         <viewLayoutGuide key="safeArea" id="J2H-QW-bSH"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="WW7-rU-DdN" firstAttribute="leading" secondItem="J2H-QW-bSH" secondAttribute="leading" id="08x-gS-dPT"/>
                             <constraint firstItem="ejo-CN-kaB" firstAttribute="trailing" secondItem="J2H-QW-bSH" secondAttribute="trailing" id="8tS-9G-cPC"/>
                             <constraint firstItem="ETo-ef-1nV" firstAttribute="centerY" secondItem="H1z-Up-93x" secondAttribute="centerY" id="CVj-lo-ERZ"/>
                             <constraint firstItem="ejo-CN-kaB" firstAttribute="top" secondItem="J2H-QW-bSH" secondAttribute="top" id="JAV-b1-deu"/>
+                            <constraint firstItem="WW7-rU-DdN" firstAttribute="trailing" secondItem="J2H-QW-bSH" secondAttribute="trailing" id="OVT-GA-86Q"/>
                             <constraint firstAttribute="bottom" secondItem="ejo-CN-kaB" secondAttribute="bottom" id="oyJ-cx-XYk"/>
+                            <constraint firstItem="WW7-rU-DdN" firstAttribute="top" secondItem="J2H-QW-bSH" secondAttribute="top" id="txv-Ys-kiO"/>
                             <constraint firstItem="ejo-CN-kaB" firstAttribute="leading" secondItem="J2H-QW-bSH" secondAttribute="leading" id="v3g-Q6-4ni"/>
                             <constraint firstItem="ETo-ef-1nV" firstAttribute="centerX" secondItem="H1z-Up-93x" secondAttribute="centerX" id="zod-cd-sQf"/>
                         </constraints>
@@ -67,6 +87,8 @@
                         <outlet property="hud" destination="ETo-ef-1nV" id="laU-UP-WTM"/>
                         <outlet property="lineChart" destination="ejo-CN-kaB" id="8ko-uW-1bA"/>
                         <outlet property="tableChart" destination="8k3-A0-Qft" id="MHL-Gh-5hc"/>
+                        <outlet property="tipLabel" destination="zSa-tI-tww" id="5of-Su-9KP"/>
+                        <outlet property="tipView" destination="WW7-rU-DdN" id="jPC-2S-qIb"/>
                         <outlet property="viewModeBtn" destination="Wdh-KZ-16G" id="gM8-WV-tVQ"/>
                     </connections>
                 </viewController>
@@ -133,6 +155,9 @@
         </systemColor>
         <systemColor name="systemGreenColor">
             <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

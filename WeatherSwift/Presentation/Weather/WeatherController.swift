@@ -18,39 +18,73 @@ class WeatherController: UIViewController {
     @IBOutlet weak var lineChart: LineChart!
     @IBOutlet weak var tableChart: TableChart!
     @IBOutlet weak var viewModeBtn: UIBarButtonItem!
+    @IBOutlet weak var tipView: UIView!
+    @IBOutlet weak var tipLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.hidesBackButton = true
         viewModel.startUpdatingLocation()
-    
-        HUDManager.shared.isLoading
-            .receive(on: DispatchQueue.main)
-            .sink(receiveValue: { [weak self] isLoading in
-                self?.hud.isHidden = !isLoading
-            })
+        
+        viewModel.state.$loading
+            .assign(to: \.isLoading, on: hud)
             .store(in: &cancellables)
-        viewModel.$data
+        
+        viewModel.state.$data
             .receive(on: DispatchQueue.main)
             .sink { [weak self] weatherItems in
-                self?.lineChart.data = (self?.viewModel.data)!
-                self?.tableChart.data = (self?.viewModel.data)!
+                self?.lineChart.data = weatherItems
+                self?.tableChart.data = weatherItems
             }
             .store(in: &cancellables)
-        viewModel.$showTable
+        
+        viewModel.state.$showTable
             .receive(on: DispatchQueue.main)
             .sink { [weak self] showTable in
-                if showTable == true {
-                    self?.tableChart.isHidden = false
-                    self?.lineChart.isHidden = true
-                    self?.viewModeBtn.image = UIImage(systemName: "chart.xyaxis.line")
-                } else {
-                    self?.tableChart.isHidden = true
-                    self?.lineChart.isHidden = false
-                    self?.viewModeBtn.image = UIImage(systemName: "list.bullet")
+                self?.tableChart.isHidden = !showTable
+                self?.lineChart.isHidden = showTable
+                self?.viewModeBtn.image = UIImage(systemName: showTable ? "chart.xyaxis.line" : "list.bullet")
+            }
+            .store(in: &cancellables)
+        
+        viewModel.state.$uiEvent
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] uiEvent in
+                switch (uiEvent) {
+                case .reload:
+                    NSLog("reload")
+                case .showTip(let message, let autoHide):
+                    self?.showTip(message: message, autoHide: autoHide)
+                case .none: break
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    func showTip(message: String, autoHide: Bool) {
+        tipView.alpha = 0
+        tipView.isHidden = false
+        tipLabel.text = message
+        UIView.animate(withDuration: 0.3) {
+            self.tipView.alpha = 1
+            if autoHide {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.hideTip()
+                }
+            }
+        }
+    }
+    
+    func hideTip() {
+        UIView.animate(withDuration: 0.3) {
+            self.tipView.alpha = 0
+            self.tipView.isHidden = true
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        cancellables.forEach { $0.cancel() }
     }
     
     @IBAction func reload(_ sender: Any) {

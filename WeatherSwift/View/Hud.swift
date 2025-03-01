@@ -8,13 +8,20 @@
 import Foundation
 import UIKit
 import Lottie
+import Combine
 
-class Hud: UIView {
+class Hud: UIView, ObservableObject {
     
     @IBInspectable var cornerRadius: CGFloat = 20 {
         didSet {
             self.layer.cornerRadius = cornerRadius
             self.layer.masksToBounds = true
+        }
+    }
+    
+    @Published var isLoading: Bool = false {
+        didSet {
+            self.isHidden = !isLoading
         }
     }
     

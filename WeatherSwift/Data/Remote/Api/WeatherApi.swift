@@ -30,7 +30,6 @@ let customEndpointClosure = { (target: WeatherApi) -> Endpoint in
     default:
         var endpoint = MoyaProvider.defaultEndpointMapping(for: target)
         let headers = AppModule.shared.sessionHeader(target.path)
-        print(headers)
         return endpoint.adding(newHTTPHeaderFields: headers)
     }
 }

@@ -18,10 +18,12 @@ class WeatherViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager: CLLocationManager
     private var currentLocation: CLLocation?
     
-    @Published var data: [WeatherItem] = []
-    @Published var showTable: Bool = false
+//    @Published var data: [WeatherItem] = []
+//    @Published var showTable: Bool = false
     
-    var tipOptions: TipOptions = TipOptions(show: false, tip: "")
+    var state: State = State()
+    
+//    var tipOptions: TipOptions = TipOptions(show: false, tip: "")
     
     init(fetchWeather: FetchWeatherUseCase) {
         self.fetchWeather = fetchWeather
@@ -41,38 +43,44 @@ class WeatherViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
                 $0.cancel()
             }
             fetchWeather.execute(latitude: (currentLocation?.coordinate.latitude)!, longitude: (currentLocation?.coordinate.longitude)!)
-                .sink(receiveCompletion: { completion in
-                    switch completion {
-                    case .finished:
-                        print("======= finish")
+                .sink { [weak self] result in
+                    switch result {
+                    case .loading:
+                        self?.state.loading = true
+                        print("======= loading")
+                    case .success(let weatherItems):
+                        print("======= success")
+                        self?.state.loading = false
+                        self?.state.data = weatherItems
+                        self?.state.uiEvent = .showTip(message: "Fetch weather success!", autoHide: true)
                     case .failure(let error):
+                        self?.state.loading = false
+                        self?.state.uiEvent = .showTip(message: "Fetch weather data error: \(error.localizedDescription)!", autoHide: true)
                         print("======= failure: \(error.localizedDescription)")
                     }
-                }, receiveValue: { [weak self] WeatherItems in
-                    self?.data = WeatherItems
-                })
+                }
                 .store(in: &cancellables)
-            
         } else {
-            self.showTip(show: true, tip: "Has no available location", autoHide: true)
+            self.state.uiEvent = .showTip(message: "Has no available location", autoHide: true)
         }
     }
     
     func toggleViewMode() {
-        showTable.toggle()
+        state.showTable.toggle()
     }
     
     func showTip(show: Bool, tip: String, autoHide: Bool) {
-        self.tipOptions = TipOptions(show: show, tip: tip, autoHide: autoHide)
+        state.uiEvent = .showTip(message: tip, autoHide: autoHide)
+//        self.tipOptions = TipOptions(show: show, tip: tip, autoHide: autoHide)
     }
     
-    func onTipShow() {
-        if tipOptions.show && tipOptions.autoHide {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                self.tipOptions = TipOptions(show: false, tip: "")
-            }
-        }
-    }
+//    func onTipShow() {
+//        if tipOptions.show && tipOptions.autoHide {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//                self.tipOptions = TipOptions(show: false, tip: "")
+//            }
+//        }
+//    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let newLocation = locations.last {
@@ -82,7 +90,20 @@ class WeatherViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
-        self.showTip(show: true, tip: "Get location error: \(error.localizedDescription)", autoHide: false)
+        state.uiEvent = .showTip(message: "Get location error: \(error.localizedDescription)", autoHide: false)
     }
     
+}
+
+class State: ObservableObject {
+    @Published var showTable: Bool = false
+    @Published var loading: Bool = true
+    @Published var uiEvent: WeatherUiEvent? = nil
+    @Published var tip: String = ""
+    @Published var data: [WeatherItem] = []
+}
+
+enum WeatherUiEvent {
+    case reload
+    case showTip(message: String, autoHide: Bool = false)
 }
